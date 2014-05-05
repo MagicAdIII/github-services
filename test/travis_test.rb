@@ -40,6 +40,7 @@ class TravisTest < Service::TestCase
         env[:request_headers]['authorization']
       assert_equal 'push', env[:request_headers]['x-github-event']
       assert_equal 'guid-123', env[:request_headers]['x-github-guid']
+      assert_equal 'travis-ci', env[:request_headers]['x-webhook']
       assert_equal payload, JSON.parse(Faraday::Utils.parse_query(env[:body])['payload'])
     end
     @svc.receive_event
